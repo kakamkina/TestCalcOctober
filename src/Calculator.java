@@ -12,10 +12,8 @@ public class Calculator {
         b = data[1];
         c = data[2];
 
-
         StringsAndNumbers.firstCheck(a);
         StringsAndNumbers.firstCheck(c);
-//        StringsAndNumbers.secondCheck(c);
 
         switch (b) {
             case ("+"):
@@ -52,16 +50,14 @@ class Calculation {
     }
 
     //string to int
-
-    //сюда воткнуть исключение
     public static String numberSummation(String a, String c) throws Exception {
         if (StringsAndNumbers.stringTypeA(c) == true) {
             throw new Exception("При вводе пользователем выражения вроде 3 + \"hello\", калькулятор должен выбросить исключение и прекратить свою работу.");
-        } else {
+        }
+        else {
             String result = a + c;
             return result;
         }
-
     }
 
     public static String multiplication(String a, String c) {
@@ -99,19 +95,16 @@ class Calculation {
     }
 
     //вычитание
-    // надо убирать ковычки при всех операциях
     public static String subtraction(String a, String c) {
         String aWithoutQuotes = StringsAndNumbers.deleteQuotes(a);
         String cWithoutQuotes = StringsAndNumbers.deleteQuotes(c);
-
-        if (a.contains(cWithoutQuotes)) {
-            int lengthResult = aWithoutQuotes.length() - cWithoutQuotes.length();
-            String result = aWithoutQuotes.substring(0, lengthResult);
-            return result;
+        String result;
+        if (aWithoutQuotes.contains(cWithoutQuotes)) {
+            result = aWithoutQuotes.replace(cWithoutQuotes, "");
         } else {
-            String result = aWithoutQuotes;
-            return result;
+            result = aWithoutQuotes;
         }
+        return result;
     }
 }
 
