@@ -11,7 +11,10 @@ public class Calculator {
         a = data[0];
         b = data[1];
         c = data[2];
-//        StringsAndNumbers.stringType(a);
+
+
+        StringsAndNumbers.firstCheck(a);
+        StringsAndNumbers.secondCheck(c);
 
         switch(b)
         {
@@ -39,24 +42,30 @@ public class Calculator {
         }
 }
 class Calculation {
-//    String a, c;
 
     public static String stringSummation(String a, String c) {
-        String aWithoutQuotes = a.replaceAll("'", "");
-        String cWithoutQuotes = c.replaceAll("'", "");
+        String aWithoutQuotes = StringsAndNumbers.deleteQuotes(a);
+        String cWithoutQuotes = StringsAndNumbers.deleteQuotes(c);
         String result = aWithoutQuotes + cWithoutQuotes;
         return result;
     }
 
     //string to int
-    public static String numberSummation(String a, String c) {
 
-        String result = a + c;
-        return result;
+    //сюда воткнуть исключение
+    public static String numberSummation(String a, String c) {
+        if(StringsAndNumbers.stringTypeA(c) == true){
+
+        }
+        else {
+            String result = a + c;
+            return result;
+        }
+        return a;
     }
 
     public static String multiplication(String a, String c){
-        String aWithoutQuotes = a.replaceAll("'", "");
+        String aWithoutQuotes = StringsAndNumbers.deleteQuotes(a);
         StringBuilder stringBuilder = new StringBuilder();
         int cNumber = Integer.parseInt(c);
         for(int i=0;i<cNumber;i++){
@@ -70,20 +79,28 @@ class Calculation {
 
     //деление, убрала кавычки
     public static String division(String a, String c){
-        String aWithoutQuotes = a.replaceAll("'", "");
-        int cNumber = Integer.parseInt(c);
-
-        int length = aWithoutQuotes.length();
-        int lengthResult = length/cNumber;
-        String result = aWithoutQuotes.substring(0, lengthResult);
-        return result;
+        try {
+            String aWithoutQuotes = StringsAndNumbers.deleteQuotes(a);
+            int cNumber = Integer.parseInt(c);
+            int length = aWithoutQuotes.length();
+            int lengthResult = length / cNumber;
+            String result = aWithoutQuotes.substring(0, lengthResult);
+            return result;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            System.exit(0);
+        }
+        // ничего не возвращается, тк завершает работу
+        return a;
     }
 
     //вычитание
     // надо убирать ковычки при всех операциях
     public static String subtraction(String a, String c){
-        String aWithoutQuotes = a.replaceAll("'", "");
-        String cWithoutQuotes = c.replaceAll("'", "");
+        String aWithoutQuotes = StringsAndNumbers.deleteQuotes(a);
+        String cWithoutQuotes = StringsAndNumbers.deleteQuotes(c);
+
         if (a.contains(cWithoutQuotes)){
             int lengthResult = aWithoutQuotes.length() - cWithoutQuotes.length();
             String result = aWithoutQuotes.substring(0, lengthResult);
@@ -98,10 +115,10 @@ class Calculation {
 class StringsAndNumbers {
 
     //определяю тип - строка или число
-    public static boolean stringTypeA (String a) {
+    public static boolean stringTypeA(String a) {
         boolean string;
 
-        if (a.contains("'")) {
+        if (a.contains("\"")) {
             string = true;
         } else {
             string = false;
@@ -119,28 +136,111 @@ class StringsAndNumbers {
 //        } else number = true;
 //    }
 
-    public static boolean stringLengthA(String a) {
-        boolean stringLengthA;
-        if (a.length() > 10){
-            stringLengthA = false;
-            }
-        else {
-            stringLengthA = true;
+    public static String deleteQuotes(String a) {
+        if (a.contains("1 2 3 4 5 6 7 8 9 0")) {
+            return a;
+        } else {
+            // если это номер то ничего не делать, если строка то...
+            String aWithoutQuotes = a.replaceAll("\"", "");
+            return aWithoutQuotes;
         }
-        return stringLengthA;
     }
 
-    public static boolean numberType(String a){
-
-        if(a.contains()){}
+    public static void stringLength(String a) {
+        String aWithoutQuotes = StringsAndNumbers.deleteQuotes(a);
+        if (aWithoutQuotes.length() > 10) {
+            System.exit(0);
+        }
     }
-    public static void resultLength() {
-    }
-}
 
-class Actions {
+    //сюда воткнуть исключение
+    public static void firstCheck(String a) {
+        if (a.contains("\"")){
+            String aWithoutQuotes = StringsAndNumbers.deleteQuotes(a);
+                   if (aWithoutQuotes.length() > 10) {
+                       System.exit(0);
+                   }
+        }
 
-    public static void mainActions(String b){
+//        else {
+//            try {
+//                int number = Integer.parseInt(a);
+//            }
+//            catch (Exception e){
+//                System.exit(0);
+//            }
+
+
+//            if (number > 0 && number < 10)
+//        }
+//        }
+
+//
+//               if (a.contains("\"")) {
+//                   String aWithoutQuotes = StringsAndNumbers.deleteQuotes(a);
+//                   if (aWithoutQuotes.length() > 10) {
+////                       System.exit(0);
+//                   }
+//
+//               }
+//               else {
+//                   try {
+//                       if(a.contains("1")){
+//
+//                       }
+//                   }
+//                   catch (Exception e){
+//                       System.exit(0);
+//                   }
+//
+//               }
+           }
+
+
+    public static void secondCheck(String a) {
+        if (a.contains("\"")) {
+            String aWithoutQuotes = StringsAndNumbers.deleteQuotes(a);
+            if (aWithoutQuotes.length() > 10) {
+                System.exit(0);
+            }
+        } else {
+            if (a.contains("1 2 3 4 5 6 7 8 9 0")) {
+            } else {
+                System.exit(0);
+            }
+        }
+
+
+//    public static boolean stringLengthA(String a) {
+//        boolean stringLengthA;
+//        try {
+//            if (a.length() < 10 ){
+//                stringLengthA = true;
+//            }
+//        } catch(Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        return 0;
+//    }
+
+//    public static boolean numberType(String a){
+//        boolean number;
+//        if (a.contains("1 2 3 4 5 6 7 8 9 0")){
+//            number = true;
+//        }
+//        else {
+//            number = false;
+//        }
+//        return number;
+//    }
+//    public static void resultLength() {
+//    }
+//}
+
+        class Actions {
+
+            public static void mainActions(String b) {
 
 //        switch(b)
 //        {
@@ -158,9 +258,10 @@ class Actions {
 //                break;
 
 //        }
+            }
+
+        }
     }
-
 }
-
 
 
